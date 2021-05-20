@@ -23,10 +23,12 @@ class BusquedaController extends Controller
     public function create(){
         return view('busquedas.crear');
     }
-    public function show(Busqueda $objBusqueda){
+    public function show($id){
+        $objBusqueda = Busqueda::find($id);
         return view('busquedas.show')->with('busqueda',$objBusqueda);
     }
-    public function update(StoreBusqueda $request, Busqueda $objBusqueda){
+    public function update(StoreBusqueda $request, $id){
+        $objBusqueda = Busqueda::find($id);
         $objBusqueda->update([
             'idRubro'=>$request->idRubro,
             'empresa'=>$request->empresa,
@@ -35,11 +37,13 @@ class BusquedaController extends Controller
         ]);
         return redirect()->route('busquedas.show',$objBusqueda);
     }
-    public function destroy(Busqueda $objBusqueda){ 
+    public function destroy($id){ 
+        $objBusqueda = Busqueda::find($id);
         $objBusqueda->delete();
         return redirect()->route('busquedas.index');
     }
-    public function edit(Busqueda $objBusqueda){
+    public function edit($id){
+        $objBusqueda = Busqueda::find($id);
         return view('busquedas.edit')->with('busqueda',$objBusqueda);
     }
 }

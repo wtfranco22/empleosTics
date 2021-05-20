@@ -23,10 +23,12 @@ class InscripcionController extends Controller
     public function create(){
         return view('inscripciones.create');
     }
-    public function show(Inscripcion $objInscripcion){
+    public function show($id){
+        $objInscripcion = Inscripcion::find($id);
         return view('inscripciones.show')->with('inscripcion',$objInscripcion);
     }
-    public function update(StoreInscripcion $request, Inscripcion $objInscripcion){
+    public function update(StoreInscripcion $request, $id){
+        $objInscripcion= Inscripcion::find($id);
         $objInscripcion->update([
             'idRubro'=>$request->idRubro,
             'fecha'=>date('Y-m-d'),
@@ -35,11 +37,13 @@ class InscripcionController extends Controller
         ]);
         return redirect()->route('inscripciones.show',$objInscripcion);
     }    
-    public function destroy(Inscripcion $objInscripcion){
+    public function destroy($id){
+        $objInscripcion=Inscripcion::find($id);
         $objInscripcion->delete();
         return redirect()->route('routes.index');
     }
-    public function edit(Inscripcion $objInscripcion){
+    public function edit($id){
+        $objInscripcion = Inscripcion::find($id);
         return view('inscripciones.edit')->with('inscripcion',$objInscripcion);
     }
 }

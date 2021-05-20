@@ -22,20 +22,24 @@ class RubroController extends Controller
     public function create(){
         return view('rubros.create');
     }
-    public function show(Rubro $objRubro){
+    public function show($id){
+        $objRubro = Rubro::find($id);
         return view('rubros.show')->with('rubro',$objRubro);
     }
-    public function update(StoreRubro $request,Rubro $objRubro){
+    public function update(StoreRubro $request,$id){
+        $objRubro= Rubro::find($id);
         $objRubro->update([
             'descripcion'=>$request->descripcion
         ]);
         return redirect()->route('rubros.show',$objRubro);
     }
-    public function destroy(Rubro $objRubro){
+    public function destroy($id){
+        $objRubro = Rubro::find($id);
         $objRubro->delete();
         return redirect()->route('rubros.index');
     }
-    public function edit(Rubro $objRubro){
+    public function edit($id){
+        $objRubro= Rubro::find($id);
         return view('rubros.edit')->with('rubro',$objRubro);
     }
     public function busquedas($idrubro){
