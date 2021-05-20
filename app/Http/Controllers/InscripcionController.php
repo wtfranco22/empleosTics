@@ -20,9 +20,12 @@ class InscripcionController extends Controller
         ]);
         return redirect()->route('inscripciones.show',$objInscripcion);
     }
+/*{
+    Depende de la busqueda la inscripcion, no puede crearse sola
     public function create(){
         return view('inscripciones.create');
     }
+}*/
     public function show($id){
         $objInscripcion = Inscripcion::find($id);
         return view('inscripciones.show')->with('inscripcion',$objInscripcion);
