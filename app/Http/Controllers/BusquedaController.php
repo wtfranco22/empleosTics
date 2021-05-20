@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\DB;
 use App\Http\Requests\StoreBusqueda;
 use App\Models\Busqueda;
 
@@ -20,9 +21,12 @@ class BusquedaController extends Controller
         ]);
         return redirect()->route('busquedas.show',$objBusqueda);
     }
-    public function create(){
-        return view('busquedas.crear');
+/*{
+    Depende de un rubro la busqueda
+    public function create($idRubro){
+        echo"llego";
     }
+}*/
     public function show($id){
         $objBusqueda = Busqueda::find($id);
         return view('busquedas.show')->with('busqueda',$objBusqueda);
@@ -45,5 +49,12 @@ class BusquedaController extends Controller
     public function edit($id){
         $objBusqueda = Busqueda::find($id);
         return view('busquedas.edit')->with('busqueda',$objBusqueda);
+    }
+    public function inscripciones($idBusqueda){
+        $colInscripciones = DB::table('inscripcion')->where('idBusqueda','=',$idBusqueda)->get();
+        return view('inscripciones.index')->with('colInscripciones',$colInscripciones);
+    }
+    public function crearInscripcion($idBusqueda){
+        return view('inscripciones.create')->with('idBusqueda',$idBusqueda);
     }
 }
