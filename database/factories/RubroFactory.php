@@ -21,8 +21,12 @@ class RubroFactory extends Factory
      */
     public function definition()
     {
-        return [
-            'descripcion'=>$this->faker->lastName()
+        // manera de utilizar faker que nos otorga laravel y llamar a apellidos random
+        // return [
+        //     'descripcion'=>$this->faker->lastName()
+        // ];
+        return[
+            'descripcion'=>$this->faker->randomElement(['Informatica','Medicina','Abogacia','Peluqueria','Ingenieria','Plomeria'])
         ];
     }
 }
