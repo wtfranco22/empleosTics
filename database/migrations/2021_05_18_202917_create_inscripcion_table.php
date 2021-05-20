@@ -16,7 +16,7 @@ class CreateInscripcionTable extends Migration
         Schema::create('inscripcion', function (Blueprint $table) {
             $table->increments('idInscripcion',11);
             $table->unsignedInteger('idBusqueda');
-            $table->foreign('idBusqueda')->references('idBusqueda')->on('busqueda')->onUpdate('cascade')->onDelete('restrict');
+            $table->foreign('idBusqueda')->references('idBusqueda')->on('busqueda')->onUpdate('cascade')->onDelete('cascade');
             $table->date('fecha')->nullable(true);
             $table->string('nombre',150)->nullable(true);
             $table->string('apellido',150)->nullable(true);

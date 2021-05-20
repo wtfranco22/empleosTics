@@ -16,7 +16,7 @@ class CreateBusquedaTable extends Migration
         Schema::create('busqueda', function (Blueprint $table) {
             $table->increments('idBusqueda',11);
             $table->unsignedInteger('idRubro');
-            $table->foreign('idRubro')->references('idRubro')->on('rubro')->onUpdate('cascade')->onDelete('restrict');
+            $table->foreign('idRubro')->references('idRubro')->on('rubro')->onUpdate('cascade')->onDelete('cascade');
             $table->string('empresa',150)->nullable(false);
             $table->string('titulo',150)->nullable(false);
             $table->string('descripcion',150)->nullable(true);
