@@ -13,6 +13,13 @@
 <p> Nombre: {{ $inscripcion->nombre }} </p>
 
 <a href=" {{ route('inscripciones.index') }} ">Volver al inicio</a>
-<a href=" {{ route('inscripciones.show',$inscripcion->idInscripcion) }} ">Recargar</a>
-
+<br>
+<a href=" {{ route('inscripciones.edit',$inscripcion->idInscripcion) }} ">Editar</a>
+<br>
+<a href=" {{ route('inscripciones.create') }} ">Crear</a>
+<form action="{{route('inscripciones.destroy',$inscripcion->idInscripcion)}}" method="POST">
+    @csrf
+    @method('delete')
+    <input type="submit" value="Eliminar">
+</form>
 @stop

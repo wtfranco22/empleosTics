@@ -10,9 +10,17 @@
 <p> ID Rubro: <a href="{{ route('rubros.show',$busqueda->idRubro) }}"> {{$busqueda->idRubro}}</a> </p>
 <p> Empresa: {{ $busqueda->empresa }} </p>
 <p> Título: {{ $busqueda->titulo }} </p>
-<p> Descripción: {{ $busqueda->descripcion }} </p>
+<p> Descripción: {{ $busqueda->descripcion }}</p>
 
 <a href=" {{ route('busquedas.index') }} ">Volver al inicio</a>
-<a href=" {{ route('busquedas.show',$busqueda->idBusqueda) }} ">Recargar</a>
-
+<br>
+<a href=" {{ route('busquedas.edit',$busqueda->idBusqueda) }} ">Editar</a>
+<br>
+<a href=" {{ route('busquedas.crearInscripcion',$busqueda->idBusqueda) }} ">Inscribirse</a>
+<br>
+<form action="{{route('busquedas.destroy',$busqueda->idBusqueda)}}" method="POST">
+    @csrf
+    @method('delete')
+    <input type="submit" value="Eliminar">
+</form>
 @stop

@@ -7,27 +7,33 @@
 <table class="table table-bordered" id="tableRubros">
   <thead>
     <tr>
-        <th class="text-center">Id Rubro</th>
         <th class="text-center">Descripción</th>
-        <th class="text-center">Busquedas</th>
+        <th class="text-center">Rubro</th>
+        <th class="text-center">Modificar</th>
+        <th class="text-center">Ver Busquedas</th>
     </tr>
   </thead>
   <tbody>
     @foreach($colRubros as $rubro)
         <tr>
-            <td class="text-center">{{ $rubro->idRubro}}</td>
             <td class="text-center">{{ $rubro->descripcion }}</td>
             <td class="text-center">
-                <a href="{{ route('rubros.busquedas',$rubro->idRubro) }}" class="btn btn-info">Ver</a>
+              <a href=" {{ route('rubros.create',$rubro->idRubro) }} ">Crear</a>
+            </td>
+            <td class="text-center">
+              <a href="{{ route('rubros.show',$rubro->idRubro) }}">Modificar</a>
+          </td>
+            <td class="text-center">
+                <a href="{{ route('rubros.busquedas',$rubro->idRubro) }}">Busquedas</a>
             </td>
         </tr>
     @endforeach
     <tfoot>
       <tr>
         <td colspan="3">
-        <form class="navbar-form navbar-right" method="POST" action="/rubros" autocomplete="off">
+        <form class="navbar-form navbar-right" method="GET" action="{{route('rubros.buscarRubros')}}" autocomplete="off">
           <input type="text" class="form-control" id="nombre" name="nombre" placeholder="Buscar..." value="">
-          <input type="hidden" name="_token" value="{{ csrf_token() }}">
+          @csrf
         </form>
         </td>
       </tr>

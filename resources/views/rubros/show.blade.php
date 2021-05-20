@@ -10,6 +10,15 @@
 <p> Descripción: {{ $rubro->descripcion }} </p>
 
 <a href=" {{ route('rubros.index') }} ">Volver al inicio</a>
-<a href=" {{ route('rubros.show',$rubro->idRubro) }} ">Recargar</a>
+<br>
+<a href=" {{ route('rubros.edit',$rubro->idRubro) }} ">Editar</a>
+<br>
+<a href=" {{ route('rubros.crearBusqueda',$rubro->idRubro) }} ">Crear Busqueda</a>
+
+<form action="{{route('rubros.destroy',$rubro->idRubro)}}" method="POST">
+    @csrf
+    @method('delete')
+    <input type="submit" value="Eliminar">
+</form>
 
 @stop
