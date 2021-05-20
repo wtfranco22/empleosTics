@@ -32,7 +32,7 @@ class StoreRubro extends FormRequest
     {
         return[
             'descripcion.required'=>'Ingrese el nombre del rubro',
-            'descripcion.max:50'=>'Exedio la cantidad de letras'
+            'descripcion.max'=>'Cantidad de caracteres superados'
         ];
     }
 }
