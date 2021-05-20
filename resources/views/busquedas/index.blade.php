@@ -10,6 +10,7 @@
         <th class="text-center">Empresa</th>
         <th class="text-center">Modificar</th>
         <th class="text-center">Inscriptos</th>
+        <th class="text-center">Inscribirse</th>
     </tr>
   </thead>
   <tbody>
@@ -21,6 +22,9 @@
             </td>
             <td class="text-center">
               <a href="{{ route('busquedas.inscripciones',$busqueda->idBusqueda) }}">Inscripciones</a>
+          </td>
+          <td class="text-center">
+            <a href=" {{ route('busquedas.crearInscripcion',$busqueda->idBusqueda) }} ">Anotarse</a>
           </td>
         </tr>
     @endforeach

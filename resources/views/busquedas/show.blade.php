@@ -16,8 +16,6 @@
 <br>
 <a href=" {{ route('busquedas.edit',$busqueda->idBusqueda) }} ">Editar</a>
 <br>
-<a href=" {{ route('busquedas.crearInscripcion',$busqueda->idBusqueda) }} ">Inscribirse</a>
-<br>
 <form action="{{route('busquedas.destroy',$busqueda->idBusqueda)}}" method="POST">
     @csrf
     @method('delete')

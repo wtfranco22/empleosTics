@@ -30,7 +30,7 @@
     @endforeach
     <tfoot>
       <tr>
-        <td colspan="3">
+        <td colspan="4">
         <form class="navbar-form navbar-right" method="GET" action="{{route('rubros.buscarRubros')}}" autocomplete="off">
           <input type="text" class="form-control" id="nombre" name="nombre" placeholder="Buscar..." value="">
           @csrf
