@@ -14,7 +14,7 @@ class RubroController extends Controller
         return view('rubros.index')->with('colRubros',$rubros);
     }
     public function store(StoreRubro $request){
-        $objRubro=Rubro::create([
+        $objRubro = Rubro::create([
             'descripcion'=>$request->descripcion
         ]);
         return redirect()->route('rubros.show',$objRubro);
@@ -31,7 +31,7 @@ class RubroController extends Controller
         $objRubro->update([
             'descripcion'=>$request->descripcion
         ]);
-        return redirect()->route('rubros.show',$objRubro);
+        return view('rubros.show')->with('rubro',$objRubro);
     }
     public function destroy($id){
         $objRubro = Rubro::find($id);
@@ -46,12 +46,12 @@ class RubroController extends Controller
         $colBusquedas = DB::table('busqueda')->where('idRubro','=',$idrubro)->get();
         return view('busquedas.index')->with('colBusquedas',$colBusquedas);
     }
-    public function procesarRubro(){
-        $nombreRubro=Request::input('nombre');
-        return redirect()->route('rubros.nombre',$nombreRubro);
-    }
-    public function buscarRubros($nombre){
+    public function buscarRubros(){
+        $nombre = Request::input('nombre');
         $rubrosEncontrados = DB::table('rubro')->where('descripcion','=',$nombre)->get();
         return view('rubros.index')->with('colRubros',$rubrosEncontrados);
+    }
+    public function crearBusqueda($idRubro){
+        return view('busquedas.create')->with('idRubro',$idRubro);
     }
 }
