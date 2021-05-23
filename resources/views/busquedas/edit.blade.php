@@ -1,59 +1,52 @@
-@extends('app')
-
+@extends('layouts.app')
 @section('content')
 
-<form action="{{route('busquedas.update',$busqueda->idBusqueda)}}" method="POST" autocomplete="off" >
-    <h1>
-        Modificando una Busqueda
-    </h1>
-    @csrf
-    @method('put')
-    <label>
-        ID Rubro: 
+    <form action="{{ route('busquedas.update', $busqueda) }}" method="POST" autocomplete="off">
+        @csrf
+        <h1>
+            Modificando una Busqueda
+        </h1>
+        @method('put')
+        <label>
+            ID Rubro:
+            <br>
+            <input type="text" id="idRubro" name="idRubro" value="{{ $busqueda->idRubro }}" readonly>
+        </label>
         <br>
-        <input type="text" id="idRubro" name="idRubro" value="{{$busqueda->idRubro}}" readonly>
+        <label>
+            Empresa:
+            <br>
+            <input type="text" id="empresa" name="empresa" value="{{ old('empresa', $busqueda->empresa) }}">
+        </label>
         <br>
-    </label>
-    <label>
-        Empresa: 
+        @error('empresa')
+            <small>{{ $message }}</small>
+        @enderror
         <br>
-        <input type="text" id="empresa" name="empresa" value="{{old('empresa',$busqueda->empresa)}}">
+        <label>
+            titulo:
+            <br>
+            <input type="text" id="titulo" name="titulo" value="{{ old('titulo', $busqueda->titulo) }}">
+        </label>
         <br>
-    </label>
-    @error('empresa')
-    <br>
-        <small>{{$message}}</small>
-    <br>
-    @enderror
-    <label>
-        titulo: 
+        @error('titulo')
+            <small>{{ $message }}</small>
+        @enderror
         <br>
-        <input type="text" id="titulo" name="titulo" value="{{old('titulo',$busqueda->titulo)}}">
+        <label>
+            Descripción:
+            <br>
+            <input type="text" id="descripcion" name="descripcion"
+                value="{{ old('descripcion', $busqueda->descripcion) }}">
+        </label>
         <br>
-    </label>
-    
-    @error('titulo')
-    <br>
-        <small>{{$message}}</small>
-    <br>
-    @enderror
-    <label>
-        Descripción: 
+        @error('descripcion')
+            <small>{{ $message }}</small>
+        @enderror
         <br>
-        <input type="text" id="descripcion" name="descripcion" value="{{old('descripcion',$busqueda->descripcion)}}">
-        <br>
-    </label>    
-    @error('descripcion')
-    <br>
-        <small>{{$message}}</small>
-    <br>
-    @enderror
+        <label>
+            <input type="submit" value="enviar">
+        </label>
+    </form>
 
-
-    <label>
-        <input type="submit" value="enviar">
-    </label>
-    @csrf
-
-</form>
 @stop

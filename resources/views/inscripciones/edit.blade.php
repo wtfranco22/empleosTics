@@ -1,46 +1,42 @@
-@extends('app')
-
+@extends('layouts.app')
 @section('content')
 
-<form action="{{route('inscripciones.update',$inscripcion->idInscripcion)}}" method="POST" autocomplete="off" >
-    @csrf
-    @method('put')
-    <h1>
-        Modificando una Inscripción
-    </h1>
-    <label>
-        ID Busqueda: 
+    <form action="{{ route('inscripciones.update', $inscripcion) }}" method="POST" autocomplete="off">
+        @csrf
+        @method('put')
+        <h1>
+            Modificando una Inscripción
+        </h1>
         <br>
-        <input type="text" id="idBusqueda" name="idBusqueda" value="{{$inscripcion->idBusqueda}}" readonly>
+        <label>
+            ID Busqueda:
+            <br>
+            <input type="text" id="idBusqueda" name="idBusqueda" value="{{ $inscripcion->idBusqueda }}" readonly>
+        </label>
         <br>
-    </label>
-    <label>
-        Apellido: 
+        <label>
+            Apellido:
+            <br>
+            <input type="text" id="apellido" name="apellido" value="{{ old('apellido', $inscripcion->apellido) }}">
+        </label>
         <br>
-        <input type="text" id="apellido" name="apellido" value="{{old('apellido',$inscripcion->apellido)}}">
+        @error('apellido')
+            <small>{{ $message }}</small>
+        @enderror
         <br>
-    </label>
-    @error('apellido')
-    <br>
-        <small>{{$message}}</small>
-    <br>
-    @enderror
-    <label>
-        Nombre: 
+        <label>
+            Nombre:
+            <br>
+            <input type="text" id="nombre" name="nombre" value="{{ old('nombre', $inscripcion->nombre) }}">
+        </label>
         <br>
-        <input type="text" id="nombre" name="nombre" value="{{old('nombre',$inscripcion->nombre)}}">
+        @error('nombre')
+            <small>{{ $message }}</small>
+        @enderror
         <br>
-    </label>
-    
-    @error('nombre')
-    <br>
-        <small>{{$message}}</small>
-    <br>
-    @enderror
+        <label>
+            <input type="submit" value="enviar">
+        </label>
+    </form>
 
-    <label>
-        <input type="submit" value="enviar">
-    </label>
-
-</form>
 @stop

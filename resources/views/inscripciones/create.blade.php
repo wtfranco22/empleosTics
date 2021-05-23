@@ -1,45 +1,40 @@
-@extends('app')
-
+@extends('layouts.app')
 @section('content')
 
-<form action="{{route('inscripciones.store')}}" method="POST" autocomplete="off" >
-    <h1>
-        Creando un Inscripción
-    </h1>
-    <label>
-        ID Busqueda: 
+    <form action="{{ route('inscripciones.store') }}" method="POST" autocomplete="off">
+        @csrf
+        <h1>
+            Creando un Inscripción en: {{ $busqueda->empresa }}
+        </h1>
+        <label>
+            ID Busqueda:
+            <br>
+            <input type="text" id="idBusqueda" name="idBusqueda" value="{{ $busqueda->idBusqueda }}" readonly>
+        </label>
         <br>
-        <input type="text" id="idBusqueda" name="idBusqueda" value="{{$idBusqueda}}" readonly>
+        <label>
+            Apellido:
+            <br>
+            <input type="text" id="apellido" name="apellido" value="{{ old('apellido') }}">
+        </label>
         <br>
-    </label>
-    <label>
-        Apellido: 
+        @error('apellido')
+            <small>{{ $message }}</small>
+        @enderror
         <br>
-        <input type="text" id="apellido" name="apellido" value="{{old('apellido')}}">
+        <label>
+            Nombre:
+            <br>
+            <input type="text" id="nombre" name="nombre" value="{{ old('nombre') }}">
+        </label>
         <br>
-    </label>
-    @error('apellido')
-    <br>
-        <small>{{$message}}</small>
-    <br>
-    @enderror
-    <label>
-        Nombre: 
+        @error('nombre')
+            <small>{{ $message }}</small>
+        @enderror
         <br>
-        <input type="text" id="nombre" name="nombre" value="{{old('nombre')}}">
-        <br>
-    </label>
-    
-    @error('nombre')
-    <br>
-        <small>{{$message}}</small>
-    <br>
-    @enderror
+        <label>
+            <input type="submit" value="enviar">
+        </label>
+    </form>
 
-    <label>
-        <input type="submit" value="enviar">
-    </label>
-    @csrf
-
-</form>
 @stop

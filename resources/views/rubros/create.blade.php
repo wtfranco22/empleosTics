@@ -1,28 +1,24 @@
-@extends('app')
-
+@extends('layouts.app')
 @section('content')
 
-<form action="{{route('rubros.store')}}" method="POST" autocomplete="off" >
-    <h1>
-        Creando un rubro
-    </h1>
-    <label>
-        Descripción: 
+    <form action="{{ route('rubros.store') }}" method="POST" autocomplete="off">
+        @csrf
+        <h1>
+            Creando un rubro
+        </h1>
+        <label>
+            Descripción:
+            <br>
+            <input type="text" id="descripcion" name="descripcion" value="{{ old('descripcion') }}">
+        </label>
         <br>
-        <input type="text" id="descripcion" name="descripcion" value="{{old('descripcion')}}">
+        @error('descripcion')
+            <small>{{ $message }}</small>
+        @enderror
         <br>
-    </label>
+        <label>
+            <input type="submit" value="enviar">
+        </label>
+    </form>
 
-    @error('descripcion')
-    <br>
-        <small>{{$message}}</small>
-    <br>
-    @enderror
-
-    <label>
-        <input type="submit" value="enviar">
-    </label>
-    @csrf
-
-</form>
 @stop
