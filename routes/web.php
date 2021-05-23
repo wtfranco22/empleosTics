@@ -18,15 +18,18 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
-});
+})->name('inicio');
 
 /*---------------------------    R    U    B    R    O    S    -----------------------------*/
+//en la URL se mostrara el id del Objeto, la arquitectura del modelo presta su key para la url, podemos modificarlo mas adelante
+//mostrando no solamente el id del Objeto sino mostrando el nombre del Objeto
+//mas que la id, pueden recibir y enviar Objetos los metodos, declaramos la clase del objeto y sabe que debe ir al id
 
-Route::get('rubros/crearBusqueda/{idRubro}', [RubroController::class,'crearBusqueda'])->name('rubros.crearBusqueda');
+Route::get('rubros/crearBusqueda/{rubro}', [RubroController::class, 'crearBusqueda'])->name('rubros.crearBusqueda');
 
-Route::get('rubros/nombre',[RubroController::class,'buscarRubros'])->name('rubros.buscarRubros');
+Route::get('rubros/nombre', [RubroController::class, 'buscarRubros'])->name('rubros.buscarRubros');
 
-Route::get('rubros/busquedas/{idrubro}', [RubroController::class,'busquedas'])->name('rubros.busquedas');
+Route::get('rubros/busquedas/{rubro}', [RubroController::class, 'busquedas'])->name('rubros.busquedas');
 
 Route::resource('rubros', RubroController::class);
 
@@ -34,11 +37,11 @@ Route::resource('rubros', RubroController::class);
 
 /*---------------------    B    U    S    Q    U    E    D    A    S    --------------------*/
 
-Route::get('busquedas/crearInscripcion/{idBusqueda}', [BusquedaController::class,'crearInscripcion'])->name('busquedas.crearInscripcion');
+Route::get('busquedas/crearInscripcion/{busqueda}', [BusquedaController::class, 'crearInscripcion'])->name('busquedas.crearInscripcion');
 
-Route::get('busquedas/inscripciones/{idBusqueda}', [BusquedaController::class,'inscripciones'])->name('busquedas.inscripciones');
+Route::get('busquedas/inscripciones/{busqueda}', [BusquedaController::class, 'inscripciones'])->name('busquedas.inscripciones');
 
-Route::resource('busquedas',BusquedaController::class);
+Route::resource('busquedas', BusquedaController::class);
 
 
 
