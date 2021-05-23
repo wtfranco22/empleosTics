@@ -2,56 +2,61 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Support\Facades\DB;
 use App\Http\Requests\StoreRubro;
+use App\Models\Busqueda;
 use App\Models\Rubro;
-use Illuminate\Support\Facades\Request;
 
 class RubroController extends Controller
 {
-    public function index(){
+    public function index()
+    {
         $rubros = Rubro::get();
-        return view('rubros.index')->with('colRubros',$rubros);
+        return view('rubros.index')->with('colRubros', $rubros);
     }
-    public function store(StoreRubro $request){
+    public function store(StoreRubro $request)
+    {
         $objRubro = Rubro::create([
-            'descripcion'=>$request->descripcion
+            'descripcion' => $request->descripcion
         ]);
-        return redirect()->route('rubros.show',$objRubro);
+        return redirect()->route('rubros.show', $objRubro);
     }
-    public function create(){
+    public function create()
+    {
         return view('rubros.create');
     }
-    public function show($id){
-        $objRubro = Rubro::find($id);
-        return view('rubros.show')->with('rubro',$objRubro);
+    public function show(Rubro $rubro)
+    {
+        return view('rubros.show')->with('rubro', $rubro);
     }
-    public function update(StoreRubro $request,$id){
-        $objRubro= Rubro::find($id);
-        $objRubro->update([
-            'descripcion'=>$request->descripcion
+    public function update(StoreRubro $request, Rubro $rubro)
+    {
+        $rubro->update([
+            'descripcion' => $request->descripcion
         ]);
-        return view('rubros.show')->with('rubro',$objRubro);
+        return view('rubros.show')->with('rubro', $rubro);
     }
-    public function destroy($id){
-        $objRubro = Rubro::find($id);
-        $objRubro->delete();
+    public function destroy(Rubro $rubro)
+    {
+        $rubro->delete();
         return redirect()->route('rubros.index');
     }
-    public function edit($id){
-        $objRubro= Rubro::find($id);
-        return view('rubros.edit')->with('rubro',$objRubro);
+    public function edit(Rubro $rubro)
+    {
+        return view('rubros.edit')->with('rubro', $rubro);
     }
-    public function busquedas($idrubro){
-        $colBusquedas = DB::table('busqueda')->where('idRubro','=',$idrubro)->get();
-        return view('busquedas.index')->with('colBusquedas',$colBusquedas);
+    public function busquedas(Rubro $rubro)
+    {
+        $colBusquedas = Busqueda::where('idRubro', $rubro->idRubro)->get();
+        return view('busquedas.index')->with('colBusquedas', $colBusquedas);
     }
-    public function buscarRubros(){
-        $nombre = Request::input('nombre');
-        $rubrosEncontrados = DB::table('rubro')->where('descripcion','=',$nombre)->get();
-        return view('rubros.index')->with('colRubros',$rubrosEncontrados);
+    public function buscarRubros(StoreRubro $request)
+    {
+        $nombre = $request->nombre;
+        $rubrosEncontrados = Rubro::where('descripcion', $nombre)->get();
+        return view('rubros.index')->with('colRubros', $rubrosEncontrados);
     }
-    public function crearBusqueda($idRubro){
-        return view('busquedas.create')->with('idRubro',$idRubro);
+    public function crearBusqueda(Rubro $rubro)
+    {
+        return view('busquedas.create')->with('rubro', $rubro);
     }
 }
