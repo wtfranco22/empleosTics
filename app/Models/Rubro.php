@@ -20,4 +20,10 @@ class Rubro extends Model
 
     //campo reservado para ver la creacion y modificacion de la tabla, y $hidden para que no sea devuelto en las consultas
     protected $hidden=['created_at','updated_at'];
+
+    //cada objeto Rubro tiene una coleccion de objeto Busqueda, vamos a buscar su coleccion de esta manera
+    public function busquedas(){
+        return Busqueda::where('idRubro', $this->idRubro)->get();
+        //return $this->hasMany(Busqueda::class, 'foreign_key', 'local_key');
+    }
 }
